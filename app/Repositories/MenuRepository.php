@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Repositories;
+
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+/**
+ * Interface MenuRepository
+ * @package namespace App\Repositories;
+ */
+interface MenuRepository extends RepositoryInterface
+{
+    public function sortMenu();
+    public function sortMenuList($parent_id, $sort);
+    public function GetMenuList();
+}

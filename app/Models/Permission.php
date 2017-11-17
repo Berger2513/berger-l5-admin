@@ -10,6 +10,6 @@ class Permission extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['name', 'display_name', 'description'];
+    protected $fillable = ['name', 'display_name', 'description', 'parent_id'];
 
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\RoleRepository;
 use App\Repositories\PermissionRepository;
 use App\Models\Role;
+use DB;
 
 class RoleController extends Controller
 {
@@ -15,6 +16,7 @@ class RoleController extends Controller
 
     public function __construct(RoleRepository $role,PermissionRepository $permission)
     {
+        $this->middleware('check.permission:role');
         $this->role = $role;
         $this->permission = $permission;
     }
@@ -32,7 +34,7 @@ class RoleController extends Controller
     public function create()
     {
         $role = new Role();
-        return view('admin.permission.create',compact('role'));
+        return view('admin.role.create',compact('role'));
     }
 
     /**
@@ -65,12 +67,12 @@ class RoleController extends Controller
             return redirect()->back();
         }
     }
-
-    public function role_permission(Request $request)
-    {
-        $permission_list = $this->role->getAllPermissions($request->id);
-        dump($permission_list);
-    }
+    /**
+     * show role permissions list.
+     *
+     * @param  Request
+     * @return \Illuminate\Http\Response
+     */
     /**
      * Display the specified resource.
      *
@@ -79,7 +81,9 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $permission_list = $this->role->getAllPermissions();
+        $user_permission_list = $this->role->getUserPermissions($id);
+        return view('admin.role.list',compact('permission_list', 'user_permission_list','id'));
     }
 
     /**
@@ -104,14 +108,30 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result= $this->role->update($request->all(),$id);
-        if($result){
+
+        if( !empty($request->action) && $request->action== 'role_update'){
+
+            DB::table('permission_role')->where('role_id', $id)->delete();
+            foreach ($request->permission as $key => $value) {
+                    $temp =array();
+                    $temp['role_id'] = $id;
+                    $temp['permission_id'] = $value;
+                    DB::table('permission_role')->insert($temp);
+            }
+
             flash('权限修改成功')->success();
             return redirect()->route('admin.role.index');
-        }else {
-            flash('权限修改失败')->error();
-            return redirect()->back();
+        } else {
+            $result= $this->role->update($request->all(),$id);
+            if($result){
+                flash('权限修改成功')->success();
+                return redirect()->route('admin.role.index');
+            }else {
+                flash('权限修改失败')->error();
+                return redirect()->back();
+            }
         }
+
     }
 
     /**

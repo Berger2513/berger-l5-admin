@@ -21,6 +21,7 @@ class checkPermission
         $permission = '';
         switch ( $routeName ) {
             case 'admin.'.$model.'.index':
+            case 'admin.'.$model.'.show':
                 $permission = 'admin.'.$model.'.list';
                 break;
             case 'admin.'.$model.'.create':
@@ -30,6 +31,7 @@ class checkPermission
             case 'admin.'.$model.'.edit':
             case 'admin.'.$model.'.update':
             case 'admin.'.$model.'.store':
+            case 'admin.'.$model.'.action':
                 $permission = 'admin.'.$model.'.edit';
                 break;
             case 'admin.'.$model.'.delete':

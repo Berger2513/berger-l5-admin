@@ -21,14 +21,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role','RoleController',array(
         'names' =>
-            array('create' => 'admin.role.create',
-            'index'=>'admin.role.index',
-            'store'=>'admin.role.store',
-            'edit'=>'admin.role.edit',
-            'update'=>'admin.role.update',
-            'destroy'=>'admin.role.delete',
+            array(
+                'create' => 'admin.role.create',
+                'index'=>'admin.role.index',
+                'store'=>'admin.role.store',
+                'edit'=>'admin.role.edit',
+                'update'=>'admin.role.update',
+                'destroy'=>'admin.role.delete',
+                'show'=>'admin.role.show',
             )
     ));
+    Route::post('/role_store', 'RoleController@action')->name('admin.role.action');
 
-    Route::get('/role_permission', 'RoleController@role_permission')->name('admin.role.permission');
 });

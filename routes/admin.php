@@ -31,4 +31,16 @@ Route::group(['middleware' => 'auth'], function () {
     ));
 
     Route::get('/role_permission', 'RoleController@role_permission')->name('admin.role.permission');
+
+    Route::resource('user','UserController',array(
+        'names' =>
+            array('create' => 'admin.user.create',
+            'index'=>'admin.user.index',
+            'store'=>'admin.user.store',
+            'edit'=>'admin.user.edit',
+            'update'=>'admin.user.update',
+            'destroy'=>'admin.user.delete',
+            )
+    ));
+
 });

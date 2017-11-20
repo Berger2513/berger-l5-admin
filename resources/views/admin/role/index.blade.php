@@ -66,7 +66,7 @@
                         <td>{{$role->description}}</td>
                         <td>
                           <a href="{{route('admin.role.edit',array('id'=>$role->id))}}" class="btn btn-default">修改</a>
-                          <a href="{{route('admin.role.permission',array('id'=>$role->id))}}" class="btn btn-default">查看角色权限</a>
+                          <a href="{{route('admin.role.show',array('id'=>$role->id))}}" class="btn btn-default">查看角色权限</a>
                         </td>
                     </tr>
                     @endforeach

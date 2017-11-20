@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Permission extends Model implements Transformable
+class Role_user extends Model implements Transformable
 {
     use TransformableTrait;
-
-    protected $fillable = ['name', 'display_name', 'description', 'parent_id'];
+    protected $table = 'role_user';
+    protected $fillable = ['user_id', 'role_id'];
+     public $timestamps = false;
 
 }

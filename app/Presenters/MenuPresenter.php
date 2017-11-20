@@ -53,10 +53,13 @@ class MenuPresenter
     public function getActionButton($id,$status)
     {
         $html = '<div class="pull-right action-buttons">';
-
-        if( Auth::user()->can('admin.menu.add')){
-            $html .= "<a href='javascript:;' data-pid='".$id."' class='btn-xs createMenu'><i class='fa fa-plus'></i></a>";
+        if($status == true){
+            if( Auth::user()->can('admin.menu.add')){
+                $html .= "<a href='javascript:;' data-pid='".$id."' class='btn-xs createMenu'><i class='fa fa-plus'></i></a>";
+            }
         }
+
+
         if( Auth::user()->can('admin.menu.edit')){
             $html .= "<a href='javascript:;' data-pid='".$id."' class='btn-xs editMenu' data-toggle='tooltip' data-original-title='#' data-path='".route('admin.menu_update')."'  data-placement='top'><i class='fa fa-pencil'></i></a>";
         }

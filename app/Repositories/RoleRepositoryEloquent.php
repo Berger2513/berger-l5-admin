@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\RoleRepository;
 use App\Models\Role;
 use App\Models\Permission_Role;
+use App\Models\Permission;
 use App\Validators\RoleValidator;
 /**
  * Class RoleRepositoryEloquent
@@ -34,10 +35,23 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-
-    public function getAllPermissions($user_id)
+    public function getAllPermissions()
     {
+        $permission_lists = array();
+        $temp = Permission::where('parent_id',0)->get()->toArray();
+        foreach ($temp as $key => $value) {
+            $permission_lists[$value['id']] = $value;
+            $permission_lists[$value['id']]['chlid'] = Permission::where('parent_id',$value['id'])->get()->toArray();
+        }
+        return $permission_lists;
+    }
 
-        return Permission_Role::where('role_id',$user_id)->get();
+    public function getUserPermissions($user_id)
+    {
+        $data = Permission_Role::where('role_id',$user_id)->get()
+                                ->map(function ($info) {
+                                    return $info;
+                                })->pluck('permission_id')->toArray();
+        return $data;
     }
 }

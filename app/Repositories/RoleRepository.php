@@ -10,5 +10,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface RoleRepository extends RepositoryInterface
 {
-    public function getAllPermissions($user_id);
+    public function getAllPermissions();
+    public function getUserPermissions($user_id);
 }

@@ -21,25 +21,26 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role','RoleController',array(
         'names' =>
-            array('create' => 'admin.role.create',
-            'index'=>'admin.role.index',
-            'store'=>'admin.role.store',
-            'edit'=>'admin.role.edit',
-            'update'=>'admin.role.update',
-            'destroy'=>'admin.role.delete',
+            array(
+                'create' => 'admin.role.create',
+                'index'=>'admin.role.index',
+                'store'=>'admin.role.store',
+                'edit'=>'admin.role.edit',
+                'update'=>'admin.role.update',
+                'destroy'=>'admin.role.delete',
+                'show'=>'admin.role.show',
             )
     ));
 
-    Route::get('/role_permission', 'RoleController@role_permission')->name('admin.role.permission');
-
     Route::resource('user','UserController',array(
         'names' =>
-            array('create' => 'admin.user.create',
-            'index'=>'admin.user.index',
-            'store'=>'admin.user.store',
-            'edit'=>'admin.user.edit',
-            'update'=>'admin.user.update',
-            'destroy'=>'admin.user.delete',
+            array(
+                'create' => 'admin.user.create',
+                'index'=>'admin.user.index',
+                'store'=>'admin.user.store',
+                'edit'=>'admin.user.edit',
+                'update'=>'admin.user.update',
+                'destroy'=>'admin.user.delete',
             )
     ));
 

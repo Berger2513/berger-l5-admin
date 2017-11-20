@@ -32,10 +32,13 @@
       <div class="x_title">
         <h2>权限管理 <small>Users</small></h2>
         <ul class="nav navbar-right panel_toolbox">
+            <li><a class="btn btn-default" href="{{ route('admin.permission.index')}}"><i class="fa  fa-mail-forward "></i>返回上级</a>
+            </li>
             @permission('admin.permission.add')
-            <li><a class="btn btn-default" href="{{ route('admin.permission.create')}}"><i class="fa fa-plus"></i>添加</a>
+            <li><a class="btn btn-success" href="{{ route('admin.permission.create')}}"><i class="fa fa-plus"></i>添加</a>
             </li>
             @endpermission
+
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
           <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -64,7 +67,12 @@
                         <td>{{$permission->name}}</td>
                         <td>{{$permission->display_name}}</td>
                         <td>{{$permission->description}}</td>
-                        <td><a href="{{route('admin.permission.edit',array('id'=>$permission->id))}}" class="btn btn-default">修改</a></td>
+                        <td>
+                          <a href="{{route('admin.permission.edit',array('id'=>$permission->id))}}" class="btn btn-default">修改</a>
+                          @if(isset($flag) && $flag== true)
+                            <a href="{{route('admin.permission.index',array('id'=>$permission->id))}}" class="btn btn-default">查看下级</a>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

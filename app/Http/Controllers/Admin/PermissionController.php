@@ -23,10 +23,16 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $Request)
     {
-        $permissions = $this->permission->all();
-        return view('admin.permission.index',compact('permissions'));
+        if(empty($Request->id)){
+            $permissions = $this->permission->findWhere(['parent_id'=>0]);
+            $flag = true;
+        } else {
+            $permissions = $this->permission->findWhere(['parent_id'=>$Request->id]);
+            $flag = false;
+        }
+        return view('admin.permission.index',compact('permissions','flag'));
     }
 
     /**
@@ -37,7 +43,8 @@ class PermissionController extends Controller
     public function create()
     {
         $permission = new Permission();
-        return view('admin.permission.create',compact('permission'));
+        $options = $this->permission->findWhere(['parent_id'=>0]);
+        return view('admin.permission.create',compact('permission', 'options'));
     }
 
     /**
@@ -91,8 +98,8 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $permission = $this->permission->find($id);
-
-        return view('admin.permission.create', compact('permission'));
+        $options = $this->permission->findWhere(['parent_id'=>0]);
+        return view('admin.permission.create', compact('permission','options'));
     }
 
     /**

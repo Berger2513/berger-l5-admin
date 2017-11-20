@@ -30,12 +30,12 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>权限管理 <small>Users</small></h2>
+        <h2>用户管理 <small>Users</small></h2>
         <ul class="nav navbar-right panel_toolbox">
-            @permission('admin.role.add')
-            <li><a class="btn btn-default" href="{{ route('admin.role.create')}}"><i class="fa fa-plus"></i>添加</a>
+            <!-- @permission('admin.role.add')
+            <li><a class="btn btn-default" href="{{ route('admin.user.create')}}"><i class="fa fa-plus"></i>添加</a>
             </li>
-            @endpermission
+            @endpermission -->
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
           <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -51,22 +51,36 @@
                 <thead>
                      <tr>
                       <th>编号</th>
-                      <th>权限规则</th>
-                      <th>权限名称</th>
-                      <th>权限说明</th>
+                      <th>用户名称</th>
+                      <th>昵称</th>
+                      <th>email</th>
+                      <th>角色</th>
                       <th>操作</th>
                      </tr>
                 </thead>
                 <tbody>
-                    @foreach($roles as $role)
+                    @foreach($users as $user)
                     <tr>
-                        <td>{{$role->id}}</td>
-                        <td>{{$role->name}}</td>
-                        <td>{{$role->display_name}}</td>
-                        <td>{{$role->description}}</td>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->nickname}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->role->display_name}}</td>
                         <td>
-                          <a href="{{route('admin.role.edit',array('id'=>$role->id))}}" class="btn btn-default">修改</a>
-                          <a href="{{route('admin.role.permission',array('id'=>$role->id))}}" class="btn btn-default">查看角色权限</a>
+
+
+                          @if(Auth()->user()->can('admin.user.edit'))
+                          <a href="{{route('admin.user.edit',array('id'=>$user->id,'action'=>'edit' ))}}" class="btn btn-default">修改</a>
+                          <a href="{{route('admin.user.edit',array('id'=>$user->id,'action'=>'edit_role' ))}}" class="btn btn-default">分配角色</a>
+                          @endif
+
+                          @if(Auth()->user()->can('admin.user.delete'))
+                          <form action="{{route('admin.user.delete',array('id'=>$user->id))}}" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-default">删除</button>
+                          </form>
+                          @endif
                         </td>
                     </tr>
                     @endforeach

@@ -31,6 +31,17 @@ Route::group(['middleware' => 'auth'], function () {
                 'show'=>'admin.role.show',
             )
     ));
-    Route::post('/role_store', 'RoleController@action')->name('admin.role.action');
+
+    Route::resource('user','UserController',array(
+        'names' =>
+            array(
+                'create' => 'admin.user.create',
+                'index'=>'admin.user.index',
+                'store'=>'admin.user.store',
+                'edit'=>'admin.user.edit',
+                'update'=>'admin.user.update',
+                'destroy'=>'admin.user.delete',
+            )
+    ));
 
 });

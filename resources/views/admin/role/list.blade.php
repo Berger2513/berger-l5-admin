@@ -42,7 +42,9 @@
 </ul>
  <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      @permission('admin.role.edit')
       <button type="submit" class="btn btn-success">提交</button>
+      @endpermission
     </div>
   </div>
 </form>

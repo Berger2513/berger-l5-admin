@@ -74,9 +74,12 @@ class MenuPresenter
             $html = '';
             foreach ($menus as $k => $v) {
                 if( Auth()->user()->can($v->power)){
-                    $html .= '<li><a><i class="fa fa-home"></i> '.$v->name.' <span class="fa fa-chevron-down"></span></a>';
+
                     if( !empty($v->chlid)){
+                        $html .= '<li><a><i class="fa '.$v->icon.'"></i> '.$v->name.' <span class="fa fa-chevron-down"></span></a>';
                         $html .=  $this->getSidebarChlidMenus($v->chlid);
+                    } else {
+                        $html .= '<li><a href="'.$v->url.'"><i class="fa '.$v->icon.'"></i> '.$v->name.' </a>';
                     }
                 }
                 $html .= '</li>';

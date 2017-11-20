@@ -55,35 +55,23 @@ class MenuTableSeeder extends Seeder
              'url' => '/'.config('berger.app_name').'/public/admin/role',
              ]);
 
-         $html = Menu::create([
-             'name' => 'web前端',
-             'parent_id' => '0',
-             'power' => 'admin.web',
-             'url' => 'www.iwanli.me',
-         ]);
-
-         Menu::create([
-             'name' => 'ReactJs',
-             'parent_id' => $html->id,
-             'url' => 'www.iwanli.me',
-         ]);
-
-         Menu::create([
-             'name' => 'JavaScript',
-             'parent_id' => $html->id,
-             'url' => 'www.iwanli.me',
-         ]);
-
-         Menu::create([
-             'name' => 'AngularJs',
-             'parent_id' => $html->id,
-             'url' => 'www.iwanli.me',
-         ]);
-
-         Menu::create([
-             'name' => 'NodeJs',
-             'parent_id' => $html->id,
-             'url' => 'www.iwanli.me',
-         ]);
+        $content = Menu::create([
+             'name' => '内容管理',
+             'parent_id' => 0,
+             'power' => 'admin.content',
+             'url' => '/'.config('berger.app_name').'/public/admin/content',
+             ]);
+        Menu::create([
+             'name' => '文章管理',
+             'parent_id' => $content->id,
+             'power' => 'admin.post.list',
+             'url' => '/'.config('berger.app_name').'/public/admin/post',
+             ]);
+        Menu::create([
+             'name' => '分类管理',
+             'parent_id' => $content->id,
+             'power' => 'admin.category.list',
+             'url' => '/'.config('berger.app_name').'/public/admin/category',
+             ]);
     }
 }

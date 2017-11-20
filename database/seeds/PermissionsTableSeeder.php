@@ -60,8 +60,6 @@ class PermissionsTableSeeder extends Seeder
              'parent_id'    => $system->id
          ]);
 
-
-
           /**
          * 权限
          */
@@ -92,7 +90,6 @@ class PermissionsTableSeeder extends Seeder
              'description' => '删除权限',
              'parent_id'    => $system->id
          ]);
-
           /**
          * 用户
          */
@@ -151,6 +148,27 @@ class PermissionsTableSeeder extends Seeder
              'display_name' => '删除角色',
              'description' => '删除角色',
              'parent_id'    => $system->id
+         ]);
+          /**
+         * 内容管理
+         */
+        $content = Permission::create([
+             'name' => 'admin.content',
+             'display_name' => '内容管理',
+             'description' => '内容管理',
+             'parent_id'    => 0
+         ]);
+        Permission::create([
+             'name' => 'admin.post.list',
+             'display_name' => '文章列表',
+             'description' => '文章列表',
+             'parent_id'    => $content->id
+         ]);
+        Permission::create([
+             'name' => 'admin.category.list',
+             'display_name' => '分类列表',
+             'description' => '分类列表',
+             'parent_id'    => $content->id
          ]);
 
     }

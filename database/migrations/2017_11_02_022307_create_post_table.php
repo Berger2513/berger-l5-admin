@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreatePostTable extends Migration
 {
 
 	/**
@@ -13,8 +13,9 @@ class CreatePostsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('posts', function(Blueprint $table) {
+		Schema::create('post', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('titile');
 
             $table->timestamps();
 		});
@@ -27,7 +28,7 @@ class CreatePostsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('posts');
+		Schema::drop('post');
 	}
 
 }

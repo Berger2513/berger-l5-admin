@@ -44,4 +44,28 @@ Route::group(['middleware' => 'auth'], function () {
             )
     ));
 
+    Route::resource('post','PostController',array(
+        'names' =>
+            array(
+                'create' => 'admin.post.create',
+                'index'=>'admin.post.index',
+                'store'=>'admin.post.store',
+                'edit'=>'admin.post.edit',
+                'update'=>'admin.post.update',
+                'destroy'=>'admin.post.delete',
+            )
+    ));
+
+     Route::resource('category','CategoryController',array(
+        'names' =>
+            array(
+                'create' => 'admin.category.create',
+                'index'=>'admin.category.index',
+                'store'=>'admin.category.store',
+                'edit'=>'admin.category.edit',
+                'update'=>'admin.category.update',
+                'destroy'=>'admin.category.delete',
+            )
+    ));
+
 });

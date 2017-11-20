@@ -70,6 +70,7 @@ class HomeController extends Controller
                 'parent_id' => 'required',
                 'url' =>'required'
             ],$message);
+             $input = $request->except('_token');
             $resoult = $this->menu->create($input);
 
             $this->menu->sortMenu();

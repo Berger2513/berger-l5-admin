@@ -25,6 +25,7 @@
     "autoload": {
         "classmap": [
             "database/seeds",
+            "database/migrations",
             "database/factories"
         ],
         "psr-4": {

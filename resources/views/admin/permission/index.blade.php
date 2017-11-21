@@ -72,6 +72,7 @@
                           @if(isset($flag) && $flag== true)
                             <a href="{{route('admin.permission.index',array('id'=>$permission->id))}}" class="btn btn-default">查看下级</a>
                             @endif
+
                         </td>
                     </tr>
                     @endforeach

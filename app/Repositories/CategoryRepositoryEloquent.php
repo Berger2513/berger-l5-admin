@@ -24,7 +24,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +32,28 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function del($id)
+    {
+        $res = $this->findWhere(['parent_id'=>$id])->toArray();
+        if($res) {
+            $this->delete($id);
+            $msg = $this->deleteWhere(['parent_id'=>$id]);
+
+            if ($msg) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $msg = $this->deleteWhere(['id'=>$id]);
+            if ($msg) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 }

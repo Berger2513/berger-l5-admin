@@ -13,4 +13,5 @@ class Menu extends Model implements Transformable
     protected $fillable = [
         'name', 'parent_id', 'url','icon', 'heightlight_url', 'sort', 'power'
     ];
+    public $timestamps = false;
 }

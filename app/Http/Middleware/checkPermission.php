@@ -42,7 +42,8 @@ class checkPermission
         }
 
         if(!$request->user()->can($permission)){
-            abort(500,'121212122121');
+            $message = '不好意思 您没该权限';
+            return response()->view('page_500',compact('message'));
         }
 
         return $next($request);

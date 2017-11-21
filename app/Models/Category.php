@@ -9,7 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Category extends Model implements Transformable
 {
     use TransformableTrait;
-
-    protected $fillable = [];
-
+    protected $table = 'category';
+    protected $fillable = ['name', 'parent_id', 'sort'];
+    public $timestamps = false;
 }

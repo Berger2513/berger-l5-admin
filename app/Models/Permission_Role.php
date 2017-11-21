@@ -12,5 +12,5 @@ class Permission_Role extends Model implements Transformable
     protected $table = 'permission_role';
     protected $fillable = ['permission_id', 'role_id'];
 
-
+    public $timestamps = false;
 }
